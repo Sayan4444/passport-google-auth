@@ -4,7 +4,7 @@
   "description": "I have created a snippet with which we can do passportJs login using google",
   "main": "passport.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

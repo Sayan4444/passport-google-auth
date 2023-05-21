@@ -15,7 +15,7 @@ const initializePassport = () => {
         passReqToCallback: true
     },
         function (request, accessToken, refreshToken, user, done) {
-            console.log('1');
+            console.log("1", user);
             return done(null, user);
         }
     ));

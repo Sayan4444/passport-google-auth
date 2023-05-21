@@ -31,24 +31,29 @@ app.get('/auth', passport.authenticate('google', {
 // Auth Callback
 app.get('/auth/callback',
     passport.authenticate('google', {
-        successRedirect: '/auth/callback/success',
-        failureRedirect: '/auth/callback/failure'
-    }), (req, res) => {
-        console.log('2');
-    });
+        successRedirect: '/auth/success',
+        failureRedirect: '/auth/failure'
+    }));
 
 // Success
-app.get('/auth/callback/success', (req, res) => {
-    console.log('3');
+app.get('/auth/success', (req, res) => {
+    console.log('2', req.user);
     if (!req.user)
-        res.redirect('/auth/callback/failure');
-    res.send("Welcome " + req.user);
+        res.redirect('/auth/failure');
+    res.send("Welcome " + req.user.email);
 });
 
 // failure
-app.get('/auth/callback/failure', (req, res) => {
+app.get('/auth/failure', (req, res) => {
     res.send("Error");
 })
+
+app.get('/auth/logout', function (req, res, next) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+    });
+});
 
 app.listen(4000, () => {
     console.log("Server Running on port 4000");
